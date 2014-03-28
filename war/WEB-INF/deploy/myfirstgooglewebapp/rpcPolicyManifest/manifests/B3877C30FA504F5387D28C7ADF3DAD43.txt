@@ -1,0 +1,2 @@
+serviceClass: com.wells.myfirstgooglewebapp.client.GreetingService
+path: CDE254445076EAF8B9AB3EE2C5CFD95F.gwt.rpc
