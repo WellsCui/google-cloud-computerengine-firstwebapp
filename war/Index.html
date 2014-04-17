@@ -2,7 +2,8 @@
 <html>
 <head>
     <title>Hello Endpoints!</title>
-    <script async src="/js/base.js"></script>
+<!--     <script async src="/js/base.js"></script> -->
+   <script src="/js/base.js"></script>
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
 <!--     <link rel="stylesheet" href="/bootstrap/css/bootstrap-responsive.css"> -->
     <style>
@@ -45,17 +46,26 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="brand" href="#">Hello Endpoints!</a>
+             
         </div>
     </div>
 </div>
 <div class="container">
-
+<div >
+                <a href="javascript:void(0);" class="btn" id="signinButton">Sign in</a>
+            </div>
     <output id="outputLog"></output>
 
     <form onsubmit="return false;">
         <h2>Get Greeting</h2>
         <div><label for="id">Greeting ID:</label><input id="id" /></div>
         <div><input id="getGreeting" type="submit" class="btn btn-small" value="Submit"></div>
+    </form>
+    
+      <form onsubmit="return false;">
+        <h2>Authed Get Greeting</h2>
+       
+        <div><input id="authedGetGreeting" type="submit" class="btn btn-small" value="Submit"></div>
     </form>
 
     <form onsubmit="return false;">

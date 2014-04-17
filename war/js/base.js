@@ -17,6 +17,66 @@ google.appengine.samples = google.appengine.samples || {};
 google.appengine.samples.hello = google.appengine.samples.hello || {};
 
 /**
+ * Client ID of the application (from the APIs Console).
+ * @type {string}
+ */
+google.appengine.samples.hello.CLIENT_ID =
+    '779396173070.project.googleusercontent.com';
+
+/**
+ * Scopes used by the application.
+ * @type {string}
+ */
+google.appengine.samples.hello.SCOPES =
+    'https://www.googleapis.com/auth/userinfo.email';
+/**
+ * Whether or not the user is signed in.
+ * @type {boolean}
+ */
+google.appengine.samples.hello.signedIn = false;
+
+/**
+ * Loads the application UI after the user has completed auth.
+ */
+google.appengine.samples.hello.userAuthed = function() {
+  var request = gapi.client.oauth2.userinfo.get().execute(function(resp) {
+    if (!resp.code) {
+      google.appengine.samples.hello.signedIn = true;
+      document.querySelector('#signinButton').textContent = 'Sign out';
+      document.querySelector('#authedGreeting').disabled = false;
+    }
+  });
+};
+
+/**
+ * Handles the auth flow, with the given value for immediate mode.
+ * @param {boolean} mode Whether or not to use immediate mode.
+ * @param {Function} callback Callback to call on completion.
+ */
+google.appengine.samples.hello.signin = function(mode, callback) {
+  gapi.auth.authorize({client_id: google.appengine.samples.hello.CLIENT_ID,
+      scope: google.appengine.samples.hello.SCOPES, immediate: mode},
+      callback);
+};
+
+
+/**
+ * Presents the user with the authorization popup.
+ */
+google.appengine.samples.hello.auth = function() {
+  if (!google.appengine.samples.hello.signedIn) {
+    google.appengine.samples.hello.signin(false,
+        google.appengine.samples.hello.userAuthed);
+  } else {
+    google.appengine.samples.hello.signedIn = false;
+    document.querySelector('#signinButton').textContent = 'Sign in';
+    document.querySelector('#authedGreeting').disabled = true;
+  }
+};
+
+
+
+/**
  * Prints a greeting to the greeting log.
  * param {Object} greeting Greeting to print.
  */
@@ -31,7 +91,20 @@ google.appengine.samples.hello.print = function(greeting) {
  * Gets a numbered greeting via the API.
  * @param {string} id ID of the greeting.
  */
-google.appengine.samples.hello.getGreeting = function(id) {
+google.appengine.samples.hello.authedGetGreeting = function() {
+  gapi.client.helloworld.greetings.authed().execute(
+      function(resp) {
+        if (!resp.code) {
+          google.appengine.samples.hello.print(resp);
+        }
+      });
+};
+
+/**
+ * Gets a numbered greeting via the API.
+ * @param {string} id ID of the greeting.
+ */
+google.appengine.samples.hello.getGreetilng = function(id) {l
   gapi.client.helloworld.greetings.getGreeting({'id': id}).execute(
       function(resp) {
         if (!resp.code) {
@@ -61,15 +134,38 @@ google.appengine.samples.hello.listGreeting = function() {
 google.appengine.samples.hello.enableButtons = function() {
   var getGreeting = document.querySelector('#getGreeting');
   getGreeting.addEventListener('click', function(e) {
-    google.appengine.samples.hello.getGreeting(
+    google.appen/**
+     * Presents the user with the authorization popup.
+     */
+    google.appengine.samples.hello.auth = function() {
+      if (!google.appengine.samples.hello.signedIn) {
+        google.appengine.samples.hello.signin(false,
+            google.appengine.samples.hello.userAuthed);
+      } else {
+        google.appengine.samples.hello.signedIn = false;
+        document.querySelector('#signinButton').textContent = 'Sign in';
+        document.querySelector('#authedGreeting').disabled = true;
+      }
+    };gine.samples.hello.getGreeting(
         document.querySelector('#id').value);
   });
+  
+  var authedGetGreeting = document.querySelector('#authedGetGreeting');
+  authedGetGreeting.addEventListener('click', function(e) {
+	  google.appengine.samples.hello.authedGetGreeting( );
+  });
+  
 
   var listGreeting = document.querySelector('#listGreeting');
   listGreeting.addEventListener('click',
       google.appengine.samples.hello.listGreeting);
+  
+  var signinButton = document.querySelector('#signinButton');
+  signinButton.addEventListener('click', google.appengine.samples.hello.auth);
 
 };
+
+
 /**
  * Initializes the application.
  * @param {string} apiRoot Root of the API's path.
@@ -79,11 +175,14 @@ google.appengine.samples.hello.init = function(apiRoot) {
   // when they have completed.
   var apisToLoad;
   var callback = function() {
-    if (--apisToLoad == 0) {
-      google.appengine.samples.hello.enableButtons();
-    }
+	  if (--apisToLoad == 0) {
+	      google.appengine.samples.hello.enableButtons();
+	      google.appengine.samples.hello.signin(true,
+	          google.appengine.samples.hello.userAuthed);
+	    }
   }
 
-  apisToLoad = 1; // must match number of calls to gapi.client.load()
+  apisToLoad = 2; // must match number of calls to gapi.client.load()
   gapi.client.load('helloworld', 'v1', callback, apiRoot);
+  gapi.client.load('oauth2', 'v2', callback);
 };
