@@ -21,8 +21,8 @@ google.appengine.samples.hello = google.appengine.samples.hello || {};
  * @type {string}
  */
 google.appengine.samples.hello.CLIENT_ID =
-    '779396173070.project.googleusercontent.com';
-
+    '779396173070.apps.googleusercontent.com';
+//'779396173070-k3eagmt6t01n48rmjd6kfcg4tvt73t47.apps.googleusercontent.com';
 /**
  * Scopes used by the application.
  * @type {string}
@@ -75,7 +75,6 @@ google.appengine.samples.hello.auth = function() {
 };
 
 
-
 /**
  * Prints a greeting to the greeting log.
  * param {Object} greeting Greeting to print.
@@ -91,7 +90,7 @@ google.appengine.samples.hello.print = function(greeting) {
  * Gets a numbered greeting via the API.
  * @param {string} id ID of the greeting.
  */
-google.appengine.samples.hello.authedGetGreeting = function() {
+google.appengine.samples.hello.authedGreeting = function() {
   gapi.client.helloworld.greetings.authed().execute(
       function(resp) {
         if (!resp.code) {
@@ -104,7 +103,7 @@ google.appengine.samples.hello.authedGetGreeting = function() {
  * Gets a numbered greeting via the API.
  * @param {string} id ID of the greeting.
  */
-google.appengine.samples.hello.getGreetilng = function(id) {l
+google.appengine.samples.hello.getGreeting = function(id) {
   gapi.client.helloworld.greetings.getGreeting({'id': id}).execute(
       function(resp) {
         if (!resp.code) {
@@ -134,25 +133,17 @@ google.appengine.samples.hello.listGreeting = function() {
 google.appengine.samples.hello.enableButtons = function() {
   var getGreeting = document.querySelector('#getGreeting');
   getGreeting.addEventListener('click', function(e) {
-    google.appen/**
+    google.appengine.samples.hello.getGreeting(
+        document.querySelector('#id').value);
+  });/**
      * Presents the user with the authorization popup.
      */
-    google.appengine.samples.hello.auth = function() {
-      if (!google.appengine.samples.hello.signedIn) {
-        google.appengine.samples.hello.signin(false,
-            google.appengine.samples.hello.userAuthed);
-      } else {
-        google.appengine.samples.hello.signedIn = false;
-        document.querySelector('#signinButton').textContent = 'Sign in';
-        document.querySelector('#authedGreeting').disabled = true;
-      }
-    };gine.samples.hello.getGreeting(
-        document.querySelector('#id').value);
-  });
+
+   
   
-  var authedGetGreeting = document.querySelector('#authedGetGreeting');
+  var authedGetGreeting = document.querySelector('#authedGreeting');
   authedGetGreeting.addEventListener('click', function(e) {
-	  google.appengine.samples.hello.authedGetGreeting( );
+	  google.appengine.samples.hello.authedGreeting( );
   });
   
 
