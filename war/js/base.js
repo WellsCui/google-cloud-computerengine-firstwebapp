@@ -135,11 +135,7 @@ google.appengine.samples.hello.enableButtons = function() {
   getGreeting.addEventListener('click', function(e) {
     google.appengine.samples.hello.getGreeting(
         document.querySelector('#id').value);
-  });/**
-     * Presents the user with the authorization popup.
-     */
-
-   
+  });   
   
   var authedGetGreeting = document.querySelector('#authedGreeting');
   authedGetGreeting.addEventListener('click', function(e) {
