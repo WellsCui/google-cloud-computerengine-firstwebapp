@@ -72,6 +72,13 @@
         <h2>List Greetings</h2>
         <div><input id="listGreeting" type="submit" class="btn btn-small" value="Submit"></div>
     </form>
+    
+      <form onsubmit="return false;">
+        <h2>DataStore Test</h2>
+        <div><label for="id">Commodity ID:</label><input id="commodityid" /></div>
+        <div><input id="getCommodity" type="submit" class="btn btn-small" value="Submit"></div>
+      </form>
+    
     <script>
         function init() {
             google.appengine.samples.hello.init('//' + window.location.host + '/_ah/api');

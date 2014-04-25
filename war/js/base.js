@@ -127,6 +127,19 @@ google.appengine.samples.hello.listGreeting = function() {
       });
 };
 
+google.appengine.samples.hello.getCommodity = function(id) {
+	  gapi.client.dataStoreService.dataStoreTestService.getCommodity({'id': id}).execute(
+	      function(resp) {
+	        if (!resp.code) {
+	          resp.items = resp.items || [];
+	          for (var i = 0; i < resp.items.length; i++) {
+	            google.appengine.samples.hello.print(resp.items[i]);
+	          }
+	        }
+	      });
+	};
+	
+
 /**
  * Enables the button callbacks in the UI.
  */
@@ -149,6 +162,13 @@ google.appengine.samples.hello.enableButtons = function() {
   
   var signinButton = document.querySelector('#signinButton');
   signinButton.addEventListener('click', google.appengine.samples.hello.auth);
+  
+  var signinButton = document.querySelector('#getCommodity');
+  signinButton.addEventListener('click',
+		  function(e) {
+	  google.appengine.samples.hello.getCommodity(document.querySelector('#commodityid').value)
+	  });
+  
 
 };
 
@@ -169,7 +189,8 @@ google.appengine.samples.hello.init = function(apiRoot) {
 	    }
   }
 
-  apisToLoad = 2; // must match number of calls to gapi.client.load()
+  apisToLoad = 3; // must match number of calls to gapi.client.load()
   gapi.client.load('helloworld', 'v1', callback, apiRoot);
+  gapi.client.load('dataStoreService', 'v1', callback, apiRoot);
   gapi.client.load('oauth2', 'v2', callback);
 };

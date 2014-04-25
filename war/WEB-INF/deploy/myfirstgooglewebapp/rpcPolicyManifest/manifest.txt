@@ -1,3 +1,2 @@
 # Module myfirstgooglewebapp
 # RPC service class, partial path of RPC policy file
-com.wells.myfirstgooglewebapp.client.GreetingService, CDE254445076EAF8B9AB3EE2C5CFD95F.gwt.rpc
