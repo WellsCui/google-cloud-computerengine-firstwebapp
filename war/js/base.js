@@ -131,10 +131,7 @@ google.appengine.samples.hello.getCommodity = function(id) {
 	  gapi.client.dataStoreService.dataStoreTestService.getCommodity({'id': id}).execute(
 	      function(resp) {
 	        if (!resp.code) {
-	          resp.items = resp.items || [];
-	          for (var i = 0; i < resp.items.length; i++) {
-	            google.appengine.samples.hello.print(resp.items[i]);
-	          }
+	        
 	        }
 	      });
 	};

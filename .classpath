@@ -5,6 +5,8 @@
 	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER"/>
-	<classpathentry kind="con" path="com.google.gdt.eclipse.managedapis.MANAGED_API_CONTAINER/datastore-v1beta2r13lv1.16.0-rc"/>
+	<classpathentry kind="con" path="com.google.gdt.eclipse.managedapis.MANAGED_API_CONTAINER/datastore-v1beta2r14lv1.16.0-rc"/>
+	<classpathentry kind="lib" path="C:/Users/wcui/workspaces/libs/google-api-services-datastore-protobuf-java-v1beta2-rev1-2.1.0/google-api-services-datastore-protobuf-all-deps-v1beta2-rev1-2.1.0.jar" sourcepath="C:/Users/wcui/workspaces/libs/google-api-services-datastore-protobuf-java-v1beta2-rev1-2.1.0/google-api-services-datastore-protobuf-all-deps-v1beta2-rev1-2.1.0-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/wcui/workspaces/libs/google-api-services-datastore-protobuf-java-v1beta2-rev1-2.1.0/google-api-services-datastore-protobuf-all-deps-v1beta2-rev1-2.1.0-sources.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>
