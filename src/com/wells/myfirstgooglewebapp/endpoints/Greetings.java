@@ -49,6 +49,7 @@ public class Greetings {
       // Returns status code 401.
       throw new UnauthorizedException("Authorization required");
     }
+    
     HelloGreeting response = new HelloGreeting("hello " + user.getEmail());
     return response;
   }

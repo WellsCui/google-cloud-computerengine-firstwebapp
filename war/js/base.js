@@ -21,8 +21,8 @@ google.appengine.samples.hello = google.appengine.samples.hello || {};
  * @type {string}
  */
 google.appengine.samples.hello.CLIENT_ID =
-    '779396173070.apps.googleusercontent.com';
-//'779396173070-k3eagmt6t01n48rmjd6kfcg4tvt73t47.apps.googleusercontent.com';
+//    '779396173070.apps.googleusercontent.com';
+'779396173070-k3eagmt6t01n48rmjd6kfcg4tvt73t47.apps.googleusercontent.com';
 /**
  * Scopes used by the application.
  * @type {string}
@@ -34,11 +34,13 @@ google.appengine.samples.hello.SCOPES =
  * @type {boolean}
  */
 google.appengine.samples.hello.signedIn = false;
+google.appengine.samples.hello.access_token =null;
 
 /**
  * Loads the application UI after the user has completed auth.
  */
-google.appengine.samples.hello.userAuthed = function() {
+google.appengine.samples.hello.userAuthed = function(e) {
+	google.appengine.samples.hello.access_token=e.access_token;
   var request = gapi.client.oauth2.userinfo.get().execute(function(resp) {
     if (!resp.code) {
       google.appengine.samples.hello.signedIn = true;
@@ -128,7 +130,9 @@ google.appengine.samples.hello.listGreeting = function() {
 };
 
 google.appengine.samples.hello.getCommodity = function(id) {
-	  gapi.client.dataStoreService.dataStoreTestService.getCommodity({'id': id}).execute(
+	 gapi.client.dataStoreService.dataStoreTestService.getCommodity(
+			  {'id': id,
+			  'accessToken':google.appengine.samples.hello.access_token}).execute(
 	      function(resp) {
 	        if (!resp.code) {
 	        
